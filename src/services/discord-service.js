@@ -22,7 +22,7 @@ class DiscordService {
                 const cachedUsers = myCache.get("users")
 
                 if (!cachedUsers) {
-                    const mundialeGuild = await bot.guilds.cache.get(process.env.MUNDIALE_DISCORD_ID)
+                    const mundialeGuild = await bot.guilds.cache.get()
                     const users = await mundialeGuild.members.fetch()
                     const formattedUsers = users.map(elm => ({ id: elm.user.id, nickname: elm.nickname, username: elm.user.username }))
 
@@ -70,7 +70,7 @@ class DiscordService {
     async getChannels() {
         return new Promise(async (resolve) => {
             this.bot.on('ready', async () => {
-                const cachedChannels = myCache.get("channels")
+                const cachedChannels = myCache.get('channels')
 
                 if (!cachedChannels) {
                     const teams = DiscordService.getAllTeams(this.bot)
@@ -86,8 +86,8 @@ class DiscordService {
         })
     }
 
-    async sendMessageToUser({id, nickname}, phrase) {
-        const mundialeGuild = await this.bot.guilds.cache.get(process.env.MUNDIALE_DISCORD_ID)
+    async sendMessageToUser({ id, nickname }, phrase) {
+        const mundialeGuild = await this.bot.guilds.cache.get()
         const user = await mundialeGuild.members.cache.get(id)
         return user.send(`Olá mestre ${nickname}` + phrase)
     }

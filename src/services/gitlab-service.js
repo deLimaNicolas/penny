@@ -3,11 +3,6 @@ const AlfredPhraseGenerator = require('./alfred-phrase-generator')
 const axios = require('axios')
 
 class GitlabService {
-    static async getAllRooms() {
-        const discordClient = new DiscordService(process.env.DISCORD_TOKEN)
-
-        return discordClient.getChannels()
-    }
     static async getDiscordUserFromGitlabId(assigneeId, discordClient) {
         let response = null
         const assignee = await GitlabService.getUserFromGitlab(assigneeId)

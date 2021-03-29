@@ -1,50 +1,23 @@
 const GitlabService = require('../services/gitlab-service')
-
-/**
- * @tag messages
- * @tagDescription Alfred.
- */
+const ResponseService = require('../services/response-service')
 
 class GitLab {
-    /**
-     * Recebe mensagem do usuario pelo whatsapp do facebook
-     *
-     * @path /gitlab/{key}
-     * @method post
-     * @function onGitlabHandler
-     * @memorySize 256
-     * @timeout 10
-     *
-     * @required
-     * @in path
-     * @param {string} key
-    */
+    static async onGitlabHandler(req, res) {
+        try {
+            const message = req.body
+            const { key: notificationChannel } = req.params
 
-    static async onGitlabHandler(event) {
-        const message = JSON.parse(event.body)
-        const { key: notificationChannel } = event.params
+            const mapOptions = {
+                pipeline: GitlabService.handlePipeline,
+                merge_request: GitlabService.handleMergeRequest,
+                note: GitlabService.handleComment
+            }
 
-        const mapOptions = {
-            pipeline: GitlabService.handlePipeline,
-            merge_request: GitlabService.handleMergeRequest,
-            note: GitlabService.handleComment
+            await mapOptions[message.object_kind]({ message, notificationChannel })
+            ResponseService.sendResponse({ message: 'Operation Done' }, res)
+        } catch (err) {
+            ResponseService.sendResponse(err, res)
         }
-
-        await mapOptions[message.object_kind]({ message, notificationChannel })
-    }
-
-    /**
-     * Envia relação de salas e id's
-     *
-     * @path /rooms
-     * @method get
-     * @function onGetRooms
-     * @memorySize 256
-     * @timeout 10
-    */
-
-    static async onGetRooms() {
-        return GitlabService.getAllRooms()
     }
 }
 
