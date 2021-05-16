@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const NodeCache = require("node-cache");
-const myCache = new NodeCache();
+const NodeCache = require("node-cache")
+const myCache = new NodeCache()
 
 class DiscordService {
     constructor(token) {
@@ -22,8 +22,8 @@ class DiscordService {
                 const cachedUsers = myCache.get("users")
 
                 if (!cachedUsers) {
-                    const mundialeGuild = await bot.guilds.cache.get()
-                    const users = await mundialeGuild.members.fetch()
+                    const guild = await bot.guilds.cache.get()
+                    const users = await guild.members.fetch()
                     const formattedUsers = users.map(elm => ({ id: elm.user.id, nickname: elm.nickname, username: elm.user.username }))
 
                     myCache.set('users', formattedUsers, 60 * 60) //seconds
@@ -87,8 +87,8 @@ class DiscordService {
     }
 
     async sendMessageToUser({ id, nickname }, phrase) {
-        const mundialeGuild = await this.bot.guilds.cache.get()
-        const user = await mundialeGuild.members.cache.get(id)
+        const guild = await this.bot.guilds.cache.get()
+        const user = await guild.members.cache.get(id)
         return user.send(`Olá mestre ${nickname}` + phrase)
     }
 

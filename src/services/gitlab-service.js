@@ -1,5 +1,5 @@
 const DiscordService = require('./discord-service')
-const AlfredPhraseGenerator = require('./alfred-phrase-generator')
+const PennyPhraseGenerator = require('./alfred-phrase-generator')
 const axios = require('axios')
 
 class GitlabService {
@@ -90,7 +90,7 @@ class GitlabService {
 
         const discordUser = await GitlabService.getDiscordUserFromGitlabId(pipelineObject.assigneeId, discordClient)
 
-        const phrase = AlfredPhraseGenerator.genratePhraseByObject(pipelineObject)
+        const phrase = PennyPhraseGenerator.generatePhraseByObject(pipelineObject)
 
 
         await discordClient.sendMessageTonotificationChannels(notificationChannel, phrase)
@@ -111,7 +111,7 @@ class GitlabService {
 
         const discordUser = await GitlabService.getDiscordUserFromGitlabId(commentObject.assigneeId, discordClient)
 
-        const phrase = AlfredPhraseGenerator.genratePhraseByObject(commentObject)
+        const phrase = PennyPhraseGenerator.generatePhraseByObject(commentObject)
 
         await discordClient.sendMessageTonotificationChannels(notificationChannel, phrase)
 
@@ -131,7 +131,7 @@ class GitlabService {
 
         const discordUser = await GitlabService.getDiscordUserFromGitlabId(mergeObject.assigneeId, discordClient)
 
-        const phrase = AlfredPhraseGenerator.genratePhraseByObject(mergeObject)
+        const phrase = PennyPhraseGenerator.generatePhraseByObject(mergeObject)
 
         await discordClient.sendMessageTonotificationChannels(notificationChannel, phrase)
 

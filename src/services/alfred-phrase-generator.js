@@ -1,4 +1,4 @@
-class AlfredPhraseGenerator {
+class PennyPhraseGenerator {
     static createMergePhrase(object) {
         const { action, url, source_branch, target_branch } = object
 
@@ -23,17 +23,17 @@ class AlfredPhraseGenerator {
                 é de ${status}`
     }
 
-    static genratePhraseByObject(object) {
+    static generatePhraseByObject(object) {
         const { object_kind } = object
 
         const mapPhraseBuild = {
-            merge_request: AlfredPhraseGenerator.createMergePhrase,
-            note: AlfredPhraseGenerator.createNotePhrase,
-            pipeline: AlfredPhraseGenerator.createPipelinePhrase,
+            merge_request: PennyPhraseGenerator.createMergePhrase,
+            note: PennyPhraseGenerator.createNotePhrase,
+            pipeline: PennyPhraseGenerator.createPipelinePhrase,
         }
 
         return mapPhraseBuild[object_kind](object)
     }
 }
 
-module.exports = AlfredPhraseGenerator
+module.exports = PennyPhraseGenerator

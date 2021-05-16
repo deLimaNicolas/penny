@@ -1,16 +1,17 @@
 {
-  "name": "alfred-api",
+  "name": "penny-api",
   "version": "1.0.0",
-  "description": "Estou aqui para servir meu mestre",
+  "description": "I'm here to serve you master",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js"
   },
   "jest": {
     "verbose": true,
     "testEnvironment": "node"
   },
-  "author": "Gorillaz",
+  "author": "mrBlue",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
@@ -20,7 +21,9 @@
     "express": "^4.17.1",
     "jest": "^26.6.3",
     "log4js": "^6.3.0",
-    "node-cache": "^5.1.2"
+    "node-cache": "^5.1.2",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "supertest": "^6.1.3"

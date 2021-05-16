@@ -1,2 +1,2 @@
-# api-alfred
+# penny-api
 
